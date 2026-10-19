@@ -1,0 +1,543 @@
+/* =========================
+   1. GLOBAL
+========================= */
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button,
+a,
+input,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid #60a5fa;
+  outline-offset: 3px;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* =========================
+   2. THEME COLORS
+========================= */
+.app {
+  --bg: #f3f6fc;
+  --surface: #ffffff;
+  --surface-soft: #edf3ff;
+  --text: #17233f;
+  --text-muted: #64748b;
+  --border: #dce5f2;
+  --primary: #3268f5;
+  --primary-hover: #2453d4;
+  --shadow: 0 8px 28px rgba(31, 54, 100, 0.07);
+
+  min-height: 100vh;
+  padding: 0 32px 40px;
+  background: var(--bg);
+  color: var(--text);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.app.theme-dark {
+  --bg: #081426;
+  --surface: #12223a;
+  --surface-soft: #1a2d49;
+  --text: #edf4ff;
+  --text-muted: #b2c3dd;
+  --border: #2c4261;
+  --primary: #3478ff;
+  --primary-hover: #5b91ff;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+/* =========================
+   3. NAVIGATION
+========================= */
+.app-navigation {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 -32px;
+  padding: 16px 32px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 3px 16px rgba(20, 40, 80, 0.04);
+  transition: background-color 0.3s ease;
+}
+
+.app-navigation a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 18px;
+  border-radius: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.app-navigation a:hover {
+  color: var(--primary);
+  background: var(--surface-soft);
+}
+
+.app-navigation a.active {
+  color: #ffffff;
+  background: linear-gradient(135deg, #3478ff, #5558e8);
+  box-shadow: 0 5px 14px rgba(50, 104, 245, 0.22);
+}
+
+/* =========================
+   4. PAGE LAYOUT
+========================= */
+.page-container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 32px 0;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.35;
+  letter-spacing: -0.025em;
+}
+
+h1 {
+  margin: 0 0 20px;
+  color: var(--primary);
+  font-size: clamp(28px, 3vw, 38px);
+}
+
+h2 {
+  margin: 32px 0 18px;
+  font-size: 24px;
+}
+
+h3 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+.theme-dark h1,
+.theme-dark h2,
+.theme-dark h3 {
+  color: #91bdff;
+}
+
+p {
+  line-height: 1.65;
+}
+
+/* =========================
+   5. SEARCH & FILTERS
+========================= */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 24px 0;
+}
+
+input,
+select {
+  width: 100%;
+  min-width: 0;
+  min-height: 50px;
+  padding: 12px 15px;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.3s ease;
+}
+
+.toolbar input {
+  flex: 1.4;
+}
+
+.toolbar select {
+  flex: 1;
+}
+
+input::placeholder {
+  color: #94a3b8;
+}
+
+input:focus,
+select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(50, 104, 245, 0.12);
+}
+
+/* =========================
+   6. BUTTONS
+========================= */
+button {
+  min-height: 44px;
+  padding: 11px 18px;
+  color: #ffffff;
+  background: var(--primary);
+  border: 0;
+  border-radius: 11px;
+  font-weight: 600;
+}
+
+button:hover:not(:disabled) {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(50, 104, 245, 0.2);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+button:disabled {
+  color: #64748b;
+  background: #dce3ed;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.theme-dark button:disabled {
+  color: #94a3b8;
+  background: #334155;
+}
+
+/* =========================
+   7. BOOK GRID
+========================= */
+.book-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 22px;
+  margin-top: 24px;
+}
+
+/* =========================
+   8. BOOK CARDS
+========================= */
+.book-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+  padding: 24px;
+  overflow-wrap: anywhere;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+.book-card:hover {
+  transform: translateY(-4px);
+  border-color: #8bb5ff;
+  box-shadow: 0 15px 35px rgba(31, 70, 140, 0.12);
+}
+
+.theme-dark .book-card:hover {
+  border-color: #467dcb;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.book-card h2,
+.book-card h3 {
+  min-height: 2.7em;
+  margin: 0 0 14px;
+  color: #2459c9;
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.theme-dark .book-card h2,
+.theme-dark .book-card h3 {
+  color: #91bdff;
+}
+
+.book-card p {
+  margin: 8px 0 12px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.book-card button {
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 12px 22px;
+}
+
+/* =========================
+   9. WARNINGS & ERRORS
+========================= */
+.warning-message,
+.error-message {
+  padding: 16px 18px;
+  margin: 20px 0;
+  border-radius: 14px;
+  line-height: 1.6;
+}
+
+.warning-message {
+  color: #92400e;
+  background: #fff7df;
+  border: 1px solid #f5c451;
+}
+
+.warning-message button {
+  margin-top: 8px;
+  color: #ffffff;
+  background: #a16207;
+}
+
+.theme-dark .warning-message {
+  color: #fde68a;
+  background: #382b13;
+  border-color: #926b24;
+}
+
+.theme-dark .warning-message button {
+  color: #1c1917;
+  background: #fbbf24;
+}
+
+.error-message {
+  color: #991b1b;
+  background: #fff0f0;
+  border: 1px solid #fca5a5;
+}
+
+.theme-dark .error-message {
+  color: #fecaca;
+  background: #3b1720;
+  border-color: #7f303c;
+}
+
+/* =========================
+   10. LINKS & STATS
+========================= */
+.back-link {
+  display: inline-flex;
+  margin-top: 24px;
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.page-container ul {
+  padding-left: 24px;
+}
+
+.page-container li {
+  margin: 10px 0;
+  line-height: 1.6;
+}
+
+/* =========================
+   11. LOADING
+========================= */
+[role="status"] {
+  padding: 20px 0;
+  color: var(--text-muted);
+}
+
+[role="alert"] {
+  line-height: 1.6;
+}
+
+/* =========================
+   12. RESPONSIVE
+========================= */
+@media (max-width: 1200px) {
+  .book-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .book-card {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 900px) {
+  .app {
+    padding-right: 22px;
+    padding-left: 22px;
+  }
+
+  .app-navigation {
+    margin-right: -22px;
+    margin-left: -22px;
+    padding-right: 22px;
+    padding-left: 22px;
+  }
+
+  .book-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .page-container {
+    padding-top: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .app {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .app-navigation {
+    gap: 6px;
+    margin-right: -16px;
+    margin-left: -16px;
+    padding: 12px 16px;
+  }
+
+  .app-navigation a {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
+  .toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .toolbar input,
+  .toolbar select,
+  .toolbar button {
+    width: 100%;
+  }
+
+  .book-list {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .book-card {
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  .book-card h2,
+  .book-card h3 {
+    min-height: auto;
+    font-size: 19px;
+  }
+
+  h2 {
+    font-size: 21px;
+  }
+}
+
+/* =========================
+   13. REDUCED MOTION
+========================= */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+/* Nút Mượn sách - xanh lá */
+.borrow-button {
+  background: #16a34a;
+  color: #ffffff;
+  border: 1px solid #15803d;
+}
+
+.borrow-button:hover:not(:disabled) {
+  background: #15803d;
+  box-shadow: 0 5px 14px rgba(22, 163, 74, 0.25);
+}
+
+/* Nút Trả sách - xanh dương */
+.return-button {
+  background: #2563eb;
+  color: #ffffff;
+  border: 1px solid #1d4ed8;
+}
+
+.return-button:hover:not(:disabled) {
+  background: #1d4ed8;
+  box-shadow: 0 5px 14px rgba(37, 99, 235, 0.25);
+}
+
+/* Giữ màu dễ nhìn trong chế độ tối */
+.theme-dark .borrow-button {
+  background: #22a653;
+  border-color: #22a653;
+}
+
+.theme-dark .borrow-button:hover:not(:disabled) {
+  background: #15803d;
+}
+
+.theme-dark .return-button {
+  background: #3478ff;
+  border-color: #3478ff;
+}
+
+.theme-dark .return-button:hover:not(:disabled) {
+  background: #2453d4;
+}
